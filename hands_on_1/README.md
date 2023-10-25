@@ -6,6 +6,21 @@ Architecture:
 
 - TO DO
 
+## Flow of execution
+
+  - Create the network infrastructure
+    - VPC, Internet GateWay, Subnets and Tables Routes
+  - Create Security groups for the instances Which this project will use.
+  - Launch Instances with user data (bootstrapping)
+  - Update IP to name mapping in route
+  - Build Application from source code
+  - Upload to S3
+  - Download artifact to Tomcat Ec2 instance
+  - Setup ELB with HTTPS (certificate from Amazon Certificate Manager)
+  - Map ELB Endpoint to website name in Godaddy DNS
+  - Validate
+  - Build AutoScaling Group for Tomcat Instances
+  
 ## Creating a new VPC
 
 The idea of this repository is to consolidate and improve the AWS knowledge. Therefore I will create the network infrastructure (*network.tf*) at low level abstraction. 
@@ -56,6 +71,16 @@ module "vpc" {
 
 [AWS VPC Terraform module](https://registry.terraform.io/modules/terraform-aws-modules/vpc/aws/latest)
 
-## Creating the auto-scaling security group
+## Creating security groups
 
-TO DO
+**Security Group:** 
+A security group in AWS is a virtual firewall that controls inbound and outbound traffic to AWS resources, such as instances. It acts as a set of rules that specify which network traffic is allowed or denied, providing security and access control for these resources
+
+For this project, I am going to create three securities groups:
+
+  - Load Balancer Security-Group
+    - Inbound traffic: internet
+  - Tomcat App Security-Group
+    - Inbound traffic: Traffic from  ALB
+  - Backend App Services Security-Group
+    - Inbound traffic: Traffic from Tomcat web server

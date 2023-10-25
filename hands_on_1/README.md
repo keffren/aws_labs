@@ -79,9 +79,14 @@ For this project, I am going to create three securities groups:
   - Load Balancer Security-Group
     - Inbound traffic: internet
   - Tomcat App Security-Group
-    - Inbound traffic: Traffic from  ALB
+    - Inbound traffic:
+      - Traffic from  ALB
+      - Allow SSH connection
   - Backend App Services Security-Group
-    - Inbound traffic: Traffic from Tomcat web server
+    - Inbound traffic:
+      - Traffic from Tomcat web server
+      - Intern traffic
+      - Allow SSH connection
 
 There isn't an protocol type within Ingres block to define MYSQL/Aurora type, but check this:
 ![tcp_types](/hands_on_1/resources/tcp_types.png)

@@ -99,7 +99,7 @@ resource "aws_security_group" "elb" {
 
 resource "aws_security_group" "tomcat_app" {
   name        = "tomcat-app-sg"
-  description = "Allow traffic from ALB"
+  description = "Allow traffic from ALB and SSH"
   vpc_id      = aws_vpc.main_vpc.id
 
   ingress {
@@ -108,6 +108,13 @@ resource "aws_security_group" "tomcat_app" {
     to_port          = 8080
     protocol         = "tcp"
     security_groups = [ aws_security_group.elb.id ]
+  }
+
+  ingress {
+    description      = "Allow traffic from SSH"
+    from_port        = 22
+    to_port          = 22
+    protocol         = "tcp"
   }
 
   egress {
@@ -161,6 +168,13 @@ resource "aws_security_group" "backend" {
     to_port          = 5672
     protocol         = "tcp"
     security_groups = [ aws_security_group.tomcat_app.id ]
+  }
+
+  ingress {
+    description      = "Allow all SSH connection"
+    from_port        = 22
+    to_port          = 22
+    protocol         = "tcp"
   }
 
   ingress {

@@ -12,18 +12,18 @@ The idea of this repository is to consolidate and improve the AWS knowledge. The
 
 In order to create a new VPC, it needs to declare:
 
-- Internet Gateway
-    Gateway for connecting your AWS VPC to the internet.
-    Enables communication between VPC instances and the public internet.
-- Subnet
-    Segmented part of your VPC's IP address space.
-    Used for organizing and isolating resources within your VPC
-- Route table
-    A set of rules that determine how network traffic is directed.
-    Controls the flow of traffic within and in/out of your VPC subnets.
-    - Route table association
-        Links a subnet to a specific route table.
-        Specifies how traffic is routed in and out of that subnet.
+- **Internet Gateway:**
+    - Gateway for connecting your AWS VPC to the internet.
+    - Enables communication between VPC instances and the public internet.
+- **Subnet:**
+    - Segmented part of your VPC's IP address space.
+    - Used for organizing and isolating resources within your VPC
+- **Route table:**
+    - A set of rules that determine how network traffic is directed.
+    - Controls the flow of traffic within and in/out of your VPC subnets.
+        - **Route table association:**
+            - Links a subnet to a specific route table.
+            - Specifies how traffic is routed in and out of that subnet.
 
 Example of VPC underlay:
 
@@ -44,8 +44,7 @@ module "vpc" {
   #Subnets
   public_subnets  = ["10.0.1.0/24"]
 
-  #enable_nat_gateway = true
-  #enable_vpn_gateway = true
+  enable_vpn_gateway = true
 
   tags = {
     Terraform = "true"

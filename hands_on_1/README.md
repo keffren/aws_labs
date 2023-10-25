@@ -83,5 +83,21 @@ For this project, I am going to create three securities groups:
   - Backend App Services Security-Group
     - Inbound traffic: Traffic from Tomcat web server
 
-> There isn't an protocol type within Ingres block to define MYSQL/Aurora type, but check this:
+There isn't an protocol type within Ingres block to define MYSQL/Aurora type, but check this:
 ![tcp_types](/hands_on_1/resources/tcp_types.png)
+
+How can I declare all inbound traffic within ingress in terraform?
+![](/hands_on_1/resources/sg_inbound_rule.png)
+```
+ingress {
+    description      = "Allow all traffic"
+    from_port        = 0
+    to_port          = 0
+    protocol         = "-1"
+    
+    #If you want to allow traffic from a specify SG or CIDR blocks:
+    #security_groups  = [ ]
+    #self = true                -> It references itself SG
+    #cidr_blocks      = [ ]
+  }
+```

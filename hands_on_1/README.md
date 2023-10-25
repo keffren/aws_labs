@@ -20,7 +20,7 @@ Architecture:
   - Map ELB Endpoint to website name in Godaddy DNS
   - Validate
   - Build AutoScaling Group for Tomcat Instances
-  
+
 ## Creating a new VPC
 
 The idea of this repository is to consolidate and improve the AWS knowledge. Therefore I will create the network infrastructure (*network.tf*) at low level abstraction. 
@@ -44,7 +44,7 @@ Example of VPC underlay:
 
 ![vpc-architecture](/hands_on_1/resources/vpc_architecture_example%20.png)
 
-Create a VPC at high level:
+Create a VPC at high level using [AWS VPC Terraform module](https://registry.terraform.io/modules/terraform-aws-modules/vpc/aws/latest):
 
 ```
 module "vpc" {
@@ -69,8 +69,6 @@ module "vpc" {
 }
 ```
 
-[AWS VPC Terraform module](https://registry.terraform.io/modules/terraform-aws-modules/vpc/aws/latest)
-
 ## Creating security groups
 
 **Security Group:** 
@@ -84,3 +82,6 @@ For this project, I am going to create three securities groups:
     - Inbound traffic: Traffic from  ALB
   - Backend App Services Security-Group
     - Inbound traffic: Traffic from Tomcat web server
+
+> There isn't an protocol type within Ingres block to define MYSQL/Aurora type, but check this:
+![tcp_types](/hands_on_1/resources/tcp_types.png)

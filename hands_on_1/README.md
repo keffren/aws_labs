@@ -106,3 +106,14 @@ ingress {
     #cidr_blocks      = [ ]
   }
 ```
+
+## Deploy EC2 Instances
+
+### MYSQL DB Instance: CentOS-Stream-9
+
+**TERRAFORM Error:** *creating EC2 Instance: OptInRequired: In order to use this AWS Marketplace product you need to accept terms and subscribe*
+
+To fix this issue, it needs:
+
+  - You will need an AWS License Manager service linked role (SLR) to see license entitlement information on this page. To enable connectivity between AWS Marketplace and AWS License Manager, please set up SLR in the AWS License Manager Console.
+  - [Subscribe and accept the terms](https://aws.amazon.com/marketplace/pp/prodview-k66o7o642dfve) through AWS CONSOLE before deploy it using terraform.

@@ -2,6 +2,8 @@
 
 TO DO
 
+[Official project repository](https://github.com/devopshydclub/vprofile-project/tree/aws-LiftAndShift)
+
 Architecture:
 
 - TO DO
@@ -109,7 +111,7 @@ ingress {
 
 ## Deploy EC2 Instances
 
-### MYSQL DB Instance: CentOS-Stream-9
+### MYSQL DB Instance issue: CentOS-Stream-9
 
 **TERRAFORM Error:** *creating EC2 Instance: OptInRequired: In order to use this AWS Marketplace product you need to accept terms and subscribe*
 
@@ -117,3 +119,43 @@ To fix this issue, it needs:
 
   - You will need an AWS License Manager service linked role (SLR) to see license entitlement information on this page. To enable connectivity between AWS Marketplace and AWS License Manager, please set up SLR in the AWS License Manager Console.
   - [Subscribe and accept the terms](https://aws.amazon.com/marketplace/pp/prodview-k66o7o642dfve) through AWS CONSOLE before deploy it using terraform.
+
+> How check the user-data of an EC2 deployed?
+There are two ways to check the user-data:
+  - Using AWS Console:
+  `Navigate to AWS Console > EC2 > Select the deployed Instance > Actions > Instance settings > Edit user data`
+  - Within the EC2 Instance:
+  `curl http://169.254.169.254/latest/user-data`
+
+
+### Validate the EC2 deployments
+
+Previously, I added an ingress rule to the security groups that allow SSH connections. Therefore, the validation consists of accessing into the EC2 instances and checking the status of the DB and the deployed services.
+
+- TomCat Memcache
+  ```
+  sudo -i
+  ss -tunlp | grep 11211
+  ```
+- RabbitMQ
+```
+sudo -i
+systemctl status rabbitmq-server
+```
+- TomCat App
+```
+sudo -i
+systemctl status tomcat9
+
+#Check the app path, it should print ROOT
+ls /var/lib/tomcat9/webapps/ 
+```
+- DB Instance: MYSQL
+```
+sudo -i
+systemctl status mariadb
+
+#Access into th DB
+mysql -u admin -padmin123 accounts
+show tables;
+```

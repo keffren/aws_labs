@@ -115,6 +115,7 @@ resource "aws_security_group" "tomcat_app" {
     from_port        = 22
     to_port          = 22
     protocol         = "tcp"
+    cidr_blocks      = ["0.0.0.0/0"]
   }
 
   egress {
@@ -147,14 +148,6 @@ resource "aws_security_group" "backend" {
   }
 
   ingress {
-    description      = "Allow MYSQL-AURORA traffic"
-    from_port        = 3306
-    to_port          = 3306
-    protocol         = "tcp"
-    security_groups = [ aws_security_group.tomcat_app.id ]
-  }
-
-  ingress {
     description      = "Allow tomcat to connect memcache"
     from_port        = 11211
     to_port          = 11211
@@ -171,10 +164,11 @@ resource "aws_security_group" "backend" {
   }
 
   ingress {
-    description      = "Allow all SSH connection"
+    description      = "Allow traffic from SSH"
     from_port        = 22
     to_port          = 22
     protocol         = "tcp"
+    cidr_blocks      = ["0.0.0.0/0"]
   }
 
   ingress {

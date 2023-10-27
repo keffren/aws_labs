@@ -234,3 +234,22 @@ This role allows EC2 instances to call AWS services on your behalf.
 How Can we provide an IAM role to an EC2 instance using terraform?
   - Create an IAM Instance Profile 
   - Attach the IAM Instance Profile to the EC2
+
+## Deploy the artifact on TomCat App
+
+```
+sudo -i
+systemctl stop tomcat9
+
+rm -rf /var/lib/tomcat9/webapps/ROOT
+cp /tmp/vprofile-v2.war /var/lib/tomcat9/webapps/ROOT.war
+
+systemctl start tomcat9
+
+
+ls /var/lib/tomcat9/webapps/
+# OUTPUT:  ROOT ROOT.war
+
+cat /var/lib/tomcat9/webapps/ROOT/WEB-INF/classes/application.properties
+# OUTPUT: Same file that It was edited previously
+```

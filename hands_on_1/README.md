@@ -18,7 +18,7 @@ Architecture:
   - Create S3 bucket
   - Build Application from source code
   - Upload to S3
-  - Download artifact to Tomcat Ec2 instance
+  - Download artifact to Tomcat Ec2 instance through IAM role
   - Setup ELB with HTTPS (certificate from Amazon Certificate Manager)
   - Map ELB Endpoint to website name in Godaddy DNS
   - Validate
@@ -224,3 +224,9 @@ cat target/vprofile-v2/WEB-INF/classes/application.properties
 #Copy the artifact built into the S3 bucket
 aws s3 cp target/vprofile-v2.war s3://hands-on-1-artifacts/
 ```
+
+## IAM 
+
+The **TomCat app** needs to copy the artifact stored on the S3 Bucket. Hence It'll access to S3 assuming a role as AWS best practices.
+
+This role allows EC2 instances to call AWS services on your behalf.

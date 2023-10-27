@@ -230,3 +230,7 @@ aws s3 cp target/vprofile-v2.war s3://hands-on-1-artifacts/
 The **TomCat app** needs to copy the artifact stored on the S3 Bucket. Hence It'll access to S3 assuming a role as AWS best practices.
 
 This role allows EC2 instances to call AWS services on your behalf.
+
+How Can we provide an IAM role to an EC2 instance using terraform?
+  - Create an IAM Instance Profile 
+  - Attach the IAM Instance Profile to the EC2

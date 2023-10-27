@@ -186,7 +186,7 @@ It needs to create an IAM user, without login credentials, to allow copy the art
 
 This IAM user has to have S3 permissions. Therefore it has created access-key and attached the AWS managed policy: `AmazonS3FullAccess`.
 
-The course shows how to build the artifact in local, but I prefer doing it deploying a docker container which contains an Ubuntu image.
+The course shows how to build the artifact in local, but I prefer doi it deploying a docker container which contains an Ubuntu image.
 
 ```
 docker pull ubuntu
@@ -212,7 +212,7 @@ git clone -b aws-LiftAndShift https://github.com/devopshydclub/vprofile-project.
 
 # Modify MYSQL, TomCat MemCache and RabbitMQ entrypoints
 cd vprofile-project/
-install nano
+apt install nano
 nano src/main/resources/application.properties 
 
 # Build Artifact
@@ -229,13 +229,15 @@ aws s3 cp target/vprofile-v2.war s3://hands-on-1-artifacts/
 
 The **TomCat app** needs to copy the artifact stored on the S3 Bucket. Hence It'll access to S3 assuming a role as AWS best practices.
 
-This role allows EC2 instances to call AWS services on your behalf.
+This role will allows EC2 instances to call AWS services on your behalf.
 
 How Can we provide an IAM role to an EC2 instance using terraform?
   - Create an IAM Instance Profile 
   - Attach the IAM Instance Profile to the EC2
 
 ## Deploy the artifact on TomCat App
+
+Connect to TomCat App using SSH:
 
 ```
 sudo -i

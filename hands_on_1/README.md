@@ -186,7 +186,10 @@ It needs to create an IAM user, without login credentials, to allow copy the art
 
 This IAM user has to have S3 permissions. Therefore it has created access-key and attached the AWS managed policy: `AmazonS3FullAccess`.
 
+The course shows how to build the artifact in local, but I prefer doing it deploying a docker container which contains an Ubuntu image.
+
 ```
+docker pull ubuntu
 docker run -it --rm ubuntu
 apt update
 

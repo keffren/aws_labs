@@ -65,6 +65,7 @@ resource "aws_instance" "rabbitmq" {
         LabNumber= "1"
     }
 }
+*/
 
 # TOMCAT APP
 resource "aws_instance" "app" {
@@ -73,9 +74,11 @@ resource "aws_instance" "app" {
     key_name      = "admin-dev-aws"
 
     subnet_id   = aws_subnet.main_subnet.id
-    #private_ip = "10.0.1.103"
+    private_ip = "10.0.1.103"
     associate_public_ip_address = true
     security_groups = [ aws_security_group.tomcat_app.id ]
+
+    iam_instance_profile = aws_iam_instance_profile.tomcatApp_profile.name
 
     user_data = <<EOF
 #!/bin/bash
@@ -93,4 +96,15 @@ EOF
         LabNumber= "1"
     }
 }
-*/
+
+resource "aws_iam_instance_profile" "tomcatApp_profile" {
+    name = "TomCat-App-Profile"
+    role = aws_iam_role.App_S3_Access.name
+
+    tags = {
+        Name = "TomCat App Profile"
+        Terraform = "true"
+        Environment = "dev"
+        LabNumber= "1"
+    }
+}

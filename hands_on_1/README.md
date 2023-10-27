@@ -172,10 +172,52 @@ Previously, I added an ingress rule to the security groups that allow SSH connec
 
 Manages S3 bucket-level Public Access Block configuration. For more information about these settings, see [the AWS S3 Block Public Access documentation](https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-control-block-public-access.html).
 
-The bucket have not any public access:
+Guarantee the bucket have not any public access:
 ```
 block_public_acls       = true
 block_public_policy     = true
 ignore_public_acls      = true
 restrict_public_buckets = true
+```
+
+## Artifact
+
+It needs to create an IAM user, without login credentials, to allow copy the artifact from the ubuntu container to the S3 bucket using the AWS-CLI.
+
+This IAM user has to have S3 permissions. Therefore it has created access-key and attached the AWS managed policy: `AmazonS3FullAccess`.
+
+```
+docker run -it --rm ubuntu
+apt update
+
+#Install jdk8
+apt install openjdk-8-jdk -y
+
+#Install Maven
+apt install maven -y
+
+#Install git
+apt install -y
+
+#Install AWS-CLI and configure AWS profile
+apt instal awscli -y
+aws configure
+
+# Download repository that creates the artifact
+cd
+git clone -b aws-LiftAndShift https://github.com/devopshydclub/vprofile-project.git
+
+# Modify MYSQL, TomCat MemCache and RabbitMQ entrypoints
+cd vprofile-project/
+install nano
+nano src/main/resources/application.properties 
+
+# Build Artifact
+mvn install
+
+# Check the entrypoints which have edited
+cat target/vprofile-v2/WEB-INF/classes/application.properties
+
+#Copy the artifact built into the S3 bucket
+aws s3 cp target/vprofile-v2.war s3://hands-on-1-artifacts/
 ```

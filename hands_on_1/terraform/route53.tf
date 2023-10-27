@@ -1,3 +1,5 @@
+# PRIVATE HOSTED ZONE: App <-> Backend
+
 resource "aws_route53_zone" "private" {
     name = "handson1.in"
 
@@ -13,7 +15,7 @@ resource "aws_route53_zone" "private" {
     }
 }
 
-#Create Record: Simple Routing Policy
+#Create Records: Simple Routing Policy
 
 # Manage DB requests
 resource "aws_route53_record" "db_record" {

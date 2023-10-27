@@ -15,6 +15,7 @@ Architecture:
   - Create Security groups for the instances Which this project will use.
   - Launch Instances with user data (bootstrapping)
   - Update IP to name mapping in route
+  - Create S3 bucket
   - Build Application from source code
   - Upload to S3
   - Download artifact to Tomcat Ec2 instance
@@ -161,6 +162,20 @@ Previously, I added an ingress rule to the security groups that allow SSH connec
   show tables;
   ```
 
-## ROUTE 53
+## Route 53
 
 > Private zones require at least one VPC association at all times.
+
+## S3
+
+### aws_s3_bucket_public_access_block
+
+Manages S3 bucket-level Public Access Block configuration. For more information about these settings, see [the AWS S3 Block Public Access documentation](https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-control-block-public-access.html).
+
+The bucket have not any public access:
+```
+block_public_acls       = true
+block_public_policy     = true
+ignore_public_acls      = true
+restrict_public_buckets = true
+```

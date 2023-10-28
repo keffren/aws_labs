@@ -54,6 +54,19 @@ resource "aws_subnet" "main_subnet" {
   }
 }
 
+resource "aws_subnet" "failover_subnet" {
+  vpc_id                  = aws_vpc.main_vpc.id
+  cidr_block              = "10.0.2.0/24"
+  availability_zone       = "eu-west-1b"
+
+  tags = {
+    Name = "failover-subnet"
+    Terraform = "true"
+    Environment = "dev"
+    LabNumber= "1"
+  }
+}
+
 resource "aws_route_table_association" "public_rt_association" {
   subnet_id      = aws_subnet.main_subnet.id
   route_table_id = aws_route_table.public_rt.id

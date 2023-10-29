@@ -1,12 +1,10 @@
-# OVERVIEW
-
-TO DO
+# OVERVIEW: Three Tier Web App
 
 [Official project repository](https://github.com/devopshydclub/vprofile-project/tree/aws-LiftAndShift)
 
 Architecture:
 
-- TO DO
+![three_tier_architecture](/hands_on_1/resources/handson_1_architecture.drawio.png)
 
 ## Flow of execution
 

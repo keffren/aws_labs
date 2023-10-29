@@ -266,6 +266,7 @@ To create an Application Load Balancer (ALB) in AWS, the following components ar
 - **Target Group**
   - A Target Group is a logical group of backend targets, such as EC2 instances or containers, that the ALB forwards traffic to. We need to create a target group and register backend targets with it. Here we are creating for ec2 instances.
 - **Listener**: A listener is a process that checks for connection requests from clients, using a specified protocol and port, and forwards them to the ALB. We need to create a listener on the ALB that listens for incoming traffic on a specific port and protocol, and routes it to the appropriate target group.
-- SSL Certificate (Optional) — If we want to secure traffic between clients and the ALB using SSL/TLS encryption, you need to obtain and upload an SSL certificate to the ALB. (this is out of scope for this blog)
+- SSL Certificate (Optional) — If we want to secure traffic between clients and the ALB using SSL/TLS encryption, you need to obtain and upload an SSL certificate to the ALB.
+  - In this lab, the SSL encryption is enable.
 
 Once these components are in place, we can create an ALB.

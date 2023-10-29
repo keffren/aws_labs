@@ -1,3 +1,8 @@
+# EC2 Instances:
+#   - Backend services
+#       - DB, Memcache and rabittMQ
+#   - TomCat App
+
 locals {
   CentOS-Stream-9-AMI = "ami-009f51225716cb42f"
   amazon-linux-2023 = "ami-046a9f26a7f14326b"
@@ -5,7 +10,7 @@ locals {
 }
 
 #BACKEND INSTANCES
-/*
+
 resource "aws_instance" "mysql_db_backend" {
     ami           = local.CentOS-Stream-9-AMI
     instance_type = "t2.micro"
@@ -65,7 +70,6 @@ resource "aws_instance" "rabbitmq" {
         LabNumber= "1"
     }
 }
-*/
 
 # TOMCAT APP
 resource "aws_instance" "app" {

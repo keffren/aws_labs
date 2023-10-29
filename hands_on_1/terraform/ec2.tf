@@ -2,6 +2,7 @@
 #   - Backend services
 #       - DB, Memcache and rabittMQ
 #   - TomCat App
+# Auto-Scaling Group
 
 locals {
   CentOS-Stream-9-AMI = "ami-009f51225716cb42f"
@@ -111,4 +112,86 @@ resource "aws_iam_instance_profile" "tomcatApp_profile" {
         Environment = "dev"
         LabNumber= "1"
     }
+}
+
+
+# Auto-Scaling Group
+
+resource "aws_ami_from_instance" "tomcat_app_ami" {
+    name               = "tomcat-app-ami"
+    source_instance_id = aws_instance.app.id
+
+    tags = {
+        Name = "TomCat App AMI"
+        Terraform = "true"
+        Environment = "dev"
+        LabNumber= "1"
+    }
+}
+
+resource "aws_launch_template" "app_launch_template" {
+    name_prefix   = "app-launch-template"
+    image_id        = aws_ami_from_instance.tomcat_app_ami.id
+    instance_type   = "t2.micro"
+
+    key_name      = "admin-dev-aws"
+    iam_instance_profile {
+        name = aws_iam_instance_profile.tomcatApp_profile.name
+    }
+
+    vpc_security_group_ids = [ aws_security_group.tomcat_app.id ]
+
+    monitoring {
+      enabled = true
+    }
+
+    tags = {
+        Name = "App LT"
+        Terraform = "true"
+        Environment = "dev"
+        LabNumber= "1"
+    }
+}
+
+resource "aws_autoscaling_group" "app_asg" {
+    availability_zones = ["eu-west-1a", "eu-west-1b"]
+    desired_capacity   = 1
+    max_size           = 4
+    min_size           = 1
+
+    health_check_grace_period = 300
+    health_check_type         = "ELB"
+
+    launch_template {
+    id      = aws_launch_template.app_launch_template.id
+    version = "$Latest"
+    }
+
+    tag {
+      key = "Terraform"
+      value = "True"
+      propagate_at_launch = true
+    }
+
+    tag {
+      key = "LabNumber"
+      value = "1"
+      propagate_at_launch = true
+    }
+}
+
+resource "aws_autoscaling_policy" "asg_policy" {
+  name                   = "target-track-asg-policy"
+  autoscaling_group_name = aws_autoscaling_group.app_asg.id
+
+  policy_type = "TargetTrackingScaling"
+
+  target_tracking_configuration {
+    target_value = 50
+  }
+}
+
+resource "aws_autoscaling_attachment" "alb_asg_attachment" {
+  autoscaling_group_name = aws_autoscaling_group.app_asg.id
+  lb_target_group_arn = aws_lb_target_group.app_tg.arn
 }

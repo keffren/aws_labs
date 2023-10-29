@@ -270,3 +270,19 @@ To create an Application Load Balancer (ALB) in AWS, the following components ar
   - In this lab, the SSL encryption is enable.
 
 Once these components are in place, we can create an ALB.
+
+## AUTO-SCALING GROUP
+
+To deploy an Auto Scaling Group (ASG) on AWS using Terraform, it needs to define a few components and configurations.
+Here are the key elements for an Auto Scaling Group deployment:
+
+- **Launch Configuration or Launch Template:** 
+  - You need to specify the configuration for the instances that the ASG will launch. 
+  A Launch Configuration specifies instance details like the Amazon Machine Image (AMI), while a Launch Template is a more flexible and recommended way to define instance configurations.
+- **Auto Scaling Group:** 
+  - Define the Auto Scaling Group itself, specifying details like the desired capacity, minimum and maximum capacity, the availability zones, the VPC, and the health check settings.
+- **Load Balancer Configuration (optional):** 
+  - If you want instances to register with a load balancer, you can define the load balancer and configure the ASG to use it. So you have to attach the Auto-Scaling group with the load balancer.
+- **Scaling Policies (optional):**
+  - You can define scaling policies to automate the scaling of your ASG based on conditions such as CPU utilization, request counts, or custom metrics.
+  

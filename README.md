@@ -7,7 +7,8 @@ In this project, I'll engage in hands-on labs sourced from AWS Skill Builder, Ud
 ## Labs
 
 - [Hands-on-0:](/hands_on_0/README.md) Set up the aws account
-- [Hands-on-1:](/hands_on_1/README.md) Deploy a three tier web application
+- [Hands-on-1:](/hands_on_1/README.md) Deploy a multi tier web application
+- [Hands-on-2:](/hands_on_2/README.md) Create CD pipeline
 
 **Project Duration**
 

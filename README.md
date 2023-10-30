@@ -1,10 +1,14 @@
 # AWS LABS
 
-The purpose of this repository is to document some real DevOps projects on AWS from this Udemy course: [DevOps Projects | 20 Real Time DevOps Projects](https://www.udemy.com/share/103WIY3@wraVu0Li5V4Mlmx3PC3QofPOM3CJBlmqhG9LvmQG6wK6GOhX3IO1ltaVIl8RjWwf/) by Imran Teli.
+I'm excited to embark on a hands-on project where I'll combine AWS Services with Infrastructure as Code (IaC) skills using Terraform. 
 
-Moreover I will deploy those projects as IaC using terraform in order to practice my terraform skills.
+In this project, I'll engage in hands-on labs sourced from AWS Skill Builder, Udemy courses, and FreeCodeCamp resources. These labs will be deployed and managed by me using Terraform, allowing me to gain practical experience while solidifying my Terraform skills.
 
-## Projects
+## Labs
 
 - [Hands-on-0:](/hands_on_0/README.md) Set up the aws account
-- [Hands-on-1:](/hands_on_1/README.md) Deploy a web app
+- [Hands-on-1:](/hands_on_1/README.md) Deploy a three tier web application
+
+**Project Duration**
+
+The timeline for this project is flexible, allowing me to progress at my own pace. It's an exciting journey to sharpen my cloud and IaC skills, and I can't wait to unlock the potential of AWS and Terraform!

@@ -1,6 +1,10 @@
 # OVERVIEW: Three Tier Web App
 
-[Official project repository](https://github.com/devopshydclub/vprofile-project/tree/aws-LiftAndShift)
+This lab is part of the Udemy course [DevOps Projects | 20 Real Time DevOps Projects](https://www.udemy.com/share/103WIY3@wraVu0Li5V4Mlmx3PC3QofPOM3CJBlmqhG9LvmQG6wK6GOhX3IO1ltaVIl8RjWwf/) by Imran Teli, which features real DevOps projects.
+
+Furthermore, I will deploy this project as Infrastructure as Code (IaC) using Terraform to practice and enhance my Terraform skills.
+
+[Official lab repository](https://github.com/devopshydclub/vprofile-project/tree/aws-LiftAndShift)
 
 Architecture:
 

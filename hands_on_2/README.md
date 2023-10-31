@@ -22,11 +22,12 @@ The following diagram provides a visual representation of the services used in t
 ![project-architecture](/hands_on_2/resources/project_architecture.png)
 
 ## AWS Elastic Beanstalk 
-
-It is a compute service that makes it easy to deploy and manage applications on AWS without having to worry about the infrastructure that runs them. 
+<details>
+<summary>It is a compute service that makes it easy to deploy and manage applications on AWS without having to worry about the infrastructure that runs them.</summary>
 
 Elastic Beanstalk supports a wide range of application configurations, which can make it challenging to manage using Terraform. AWS provides a helpful [guide](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/command-options-general.html) that covers the general options for all environments.
 
+> [!IMPORTANT]
 > Due to the security policies of AWS, Elastic Beanstalk does not create instance profile role automatically now for new accounts. You need to manually create an instance profile and add the managed policies of AWSElasticBeanstalkWebTier in it. 
 The next guide could be helpful : [Elastic Beanstalk instance profile](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/concepts-roles-instance.html).
 
@@ -38,9 +39,40 @@ The next guide could be helpful : [Elastic Beanstalk instance profile](https://d
 - **Web server -** Software that uses the HTTP protocol to serve content over the Internet. It is used to store, process, and deliver web pages.
     - ![](/hands_on_2/resources/web_env_tier_architecture.png)
 - **Platform —** Combination of operating system, programming language runtime, web server, application server, and Elastic Beanstalk components. Your application runs using the components provided by a platform.
-    - ***solution_stack_name** defines the platform as terraform argument*
-    - solution_stack_name - A solution stack to base your Template off of. Example stacks can be found in the Amazon API documentation
+
 - **Deployment modes -**  There are two deployments modes in Elastic Beanstalk:
     - Single Instance - It's great for dev purposes, and this lab will utilize it.
         - ![](/hands_on_2/resources/single_instance_deployment_type.png)
     - High availability with load balancer - Ideal for production environments with scalability and availability.
+
+### Terraform notes
+
+- ***solution_stack_name** defines the platform as terraform argument*
+    - solution_stack_name - A solution stack to base your Template off of. Example stacks can be found in the Amazon API documentation
+
+</details>
+
+## CodeBuild
+
+<details>
+<summary>AWS CodeBuild build the source code previously stored in [the GitHub repository](https://github.com/keffren/aws-elastic-beanstalk-express-js-sample). AWS CodeBuild is a fully managed continuous integration service that compiles source code, runs tests, and produces software packages that are ready to deploy.</summary>
+
+### Key concepts
+
+- **Build process —** Process that converts source code files into an executable software artifact. It may include the following steps: compiling source code, running tests, and packaging software for deployment.
+
+- **Continuous integration —** Software development practice of regularly pushing changes to a hosted repository, after which automated builds and tests are run.
+
+- **Build environment —** Represents a combination of the operating system, programming language runtime, and tools that CodeBuild uses to run a build.
+
+- **Buildspec —** Collection of build commands and related settings, in YAML format, that CodeBuild uses to run a build.
+
+- **Build Project —** Includes information about how to run a build, including where to get the source code, which build environment to use, which build commands to run, and where to store the build output.
+
+- **OAuth —** Open protocol for secure authorization. OAuth enables you to connect your GitHub account to third-party applications, including AWS CodeBuild.
+
+### Terraform notes
+
+- `service_role` - (**Required**) Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that enables AWS CodeBuild to interact with dependent AWS services on behalf of the AWS account.
+
+</details>

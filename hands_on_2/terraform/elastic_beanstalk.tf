@@ -1,15 +1,14 @@
 resource "aws_elastic_beanstalk_application" "beanstalk_app" {
-    name        = "elastic-lab-app"
-    description = "Deploy and manage applications"
+    name        = "lab-app"
+    description = "Practice and learning purposes"
 }
 
-/*
-resource "aws_elastic_beanstalk_environment" "beanstalk-env" {
-  name                = "beanstalk-env-lab"
-  application         = aws_elastic_beanstalk_application.beanstalk_app.name
-  solution_stack_name = "64bit Amazon Linux 2 v5.8.7 running Node.js 18"
+resource "aws_elastic_beanstalk_environment" "beanstalk-dev-env" {
+    name                = "lab-app-dev"
+    application         = aws_elastic_beanstalk_application.beanstalk_app.name
+    solution_stack_name = "64bit Amazon Linux 2 v5.8.7 running Node.js 18"
 
-  tier = "WebServer"
+    tier = "WebServer"
 
     setting {
         namespace = "aws:ec2:vpc"
@@ -24,15 +23,20 @@ resource "aws_elastic_beanstalk_environment" "beanstalk-env" {
     }
 
     setting {
-        namespace = "aws:autoscaling:launchconfiguration"
-        name      = "IamInstanceProfile"
-        value     =  "aws-elasticbeanstalk-ec2-role"
+      namespace = "aws:elasticbeanstalk:environment"
+      name = "EnvironmentType"
+      value = "SingleInstance"
     }
 
     setting {
-    namespace = "aws:autoscaling:launchconfiguration"
+        namespace = "aws:autoscaling:launchconfiguration"
+        name      = "IamInstanceProfile"
+        value     =  "elastic-Beanstalk-ec2-profile"
+    }
+
+    setting {
+    namespace = "aws:ec2:instances"
     name      = "InstanceType"
     value     = "t2.micro"
     }
 }
-*/

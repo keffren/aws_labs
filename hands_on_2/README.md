@@ -25,9 +25,10 @@ The following diagram provides a visual representation of the services used in t
 
 It is a compute service that makes it easy to deploy and manage applications on AWS without having to worry about the infrastructure that runs them. 
 
-To deploy AWS Elastic Beanstalk using Terraform, I had to seek additional documentation because the HashiCorp documentation was insufficient. This blog post, [how-to-launch-aws-elastic-beanstalk-using-terraform](https://automateinfra.com/2021/03/24/how-to-launch-aws-elastic-beanstalk-using-terraform/), directed me on how to deploy it through Terraform.
+Elastic Beanstalk supports a wide range of application configurations, which can make it challenging to manage using Terraform. AWS provides a helpful [guide](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/command-options-general.html) that covers the general options for all environments.
 
-> Before create an Elastic Beanstalk environment, the iam instance profile has to be created. The next guide could be helpful : [Elastic Beanstalk instance profile](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/concepts-roles-instance.html).
+> Due to the security policies of AWS, Elastic Beanstalk does not create instance profile role automatically now for new accounts. You need to manually create an instance profile and add the managed policies of AWSElasticBeanstalkWebTier in it. 
+The next guide could be helpful : [Elastic Beanstalk instance profile](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/concepts-roles-instance.html).
 
 ### Key concepts
 
@@ -35,6 +36,11 @@ To deploy AWS Elastic Beanstalk using Terraform, I had to seek additional docume
 - **Environment -** Collection of AWS resources provisioned by Elastic Beanstalk that are used to run your application.
 - **EC2 instance -** Virtual server in the cloud. Elastic Beanstalk will provision one or more Amazon EC2 instances when creating an environment.
 - **Web server -** Software that uses the HTTP protocol to serve content over the Internet. It is used to store, process, and deliver web pages.
+    - ![](/hands_on_2/resources/web_env_tier_architecture.png)
 - **Platform —** Combination of operating system, programming language runtime, web server, application server, and Elastic Beanstalk components. Your application runs using the components provided by a platform.
     - ***solution_stack_name** defines the platform as terraform argument*
     - solution_stack_name - A solution stack to base your Template off of. Example stacks can be found in the Amazon API documentation
+- **Deployment modes -**  There are two deployments modes in Elastic Beanstalk:
+    - Single Instance - It's great for dev purposes, and this lab will utilize it.
+        - ![](/hands_on_2/resources/single_instance_deployment_type.png)
+    - High availability with load balancer - Ideal for production environments with scalability and availability.

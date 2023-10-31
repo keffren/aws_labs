@@ -73,6 +73,8 @@ The next guide could be helpful : [Elastic Beanstalk instance profile](https://d
 
 - **OAuth —** Open protocol for secure authorization. OAuth enables you to connect your GitHub account to third-party applications, including AWS CodeBuild.
 
+- **Artifact -** refers to the output generated during the build process of a project. These artifacts are the files created as a result of compiling your source code. Artifacts can include binary files, libraries, executables, and other products produced during the compilation.
+
 ### Terraform notes
 
 - `service_role` - (**Required**) Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that enables AWS CodeBuild to interact with dependent AWS services on behalf of the AWS account.

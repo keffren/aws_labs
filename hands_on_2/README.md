@@ -55,7 +55,9 @@ The next guide could be helpful : [Elastic Beanstalk instance profile](https://d
 ## CodeBuild
 
 <details>
-<summary>AWS CodeBuild build the source code previously stored in [the GitHub repository](https://github.com/keffren/aws-elastic-beanstalk-express-js-sample). AWS CodeBuild is a fully managed continuous integration service that compiles source code, runs tests, and produces software packages that are ready to deploy.</summary>
+<summary>AWS CodeBuild build the source code previously stored in the GitHub repository. AWS CodeBuild is a fully managed continuous integration service that compiles source code, runs tests, and produces software packages that are ready to deploy.</summary>
+
+[GitHub repository](https://github.com/keffren/aws-elastic-beanstalk-express-js-sample)
 
 ### Key concepts
 

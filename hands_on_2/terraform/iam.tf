@@ -5,9 +5,8 @@ data "aws_iam_policy" "AWSElasticBeanstalkMulticontainerDocker" {
   name = "AWSElasticBeanstalkMulticontainerDocker"
 }
 
-# Create Role for ELASTIC BEANSTALK
+######################################  Create Role for ELASTIC BEANSTALK
 
-## Allow assume role
 data "aws_iam_policy_document" "ec2_assume_role" {
   statement {
     actions   = [
@@ -20,7 +19,6 @@ data "aws_iam_policy_document" "ec2_assume_role" {
   }
 }
 
-# Grant permission for the ec2 launched through Elastic Beanstalk
 resource "aws_iam_role" "Custom_ElasticBeanstalk_Ec2_Role" {
     name               = "CustomElasticBeanstalkEc2Role"
     path               = "/"
@@ -44,9 +42,8 @@ resource "aws_iam_instance_profile" "elastic-Beanstalk-ec2-profile" {
     }
 }
 
-# Create role for CODEBUILD
+######################################  Create role for CODEBUILD
 
-## Allow assume role
 data "aws_iam_policy_document" "codebuild_assume_role" {
   statement {
     effect = "Allow"
@@ -59,7 +56,7 @@ data "aws_iam_policy_document" "codebuild_assume_role" {
     actions = ["sts:AssumeRole"]
   }
 }
-## Grant permission for CodeBuild to interact with dependent AWS services
+
 resource "aws_iam_role" "custom_codebuild_service_role" {
     name               = "custom-codebuild-service-role"
     assume_role_policy = data.aws_iam_policy_document.codebuild_assume_role.json
@@ -69,7 +66,6 @@ resource "aws_iam_role" "custom_codebuild_service_role" {
     }
 }
 
-## Policy
 data "aws_iam_policy_document" "codebuild_service" {
   statement {
       effect = "Allow"
@@ -121,8 +117,69 @@ data "aws_iam_policy_document" "codebuild_service" {
   }
 }
 
-## Attach role-policy
 resource "aws_iam_role_policy" "attach_policy_codebuild_role" {
   role   = aws_iam_role.custom_codebuild_service_role.name
   policy = data.aws_iam_policy_document.codebuild_service.json
+}
+
+######################################  Create role for CODEPIPELINE
+data "aws_iam_policy_document" "codepipeline_assume_role" {
+  statement {
+    effect = "Allow"
+
+    principals {
+      type        = "Service"
+      identifiers = ["codepipeline.amazonaws.com"]
+    }
+
+    actions = ["sts:AssumeRole"]
+  }
+}
+
+resource "aws_iam_role" "custom_codepipeline_service_role" {
+  name               = "custom-codepipeline-service-role"
+  assume_role_policy = data.aws_iam_policy_document.codepipeline_assume_role.json
+
+  tags = {
+    Terraform = "true"
+  }
+}
+
+data "aws_iam_policy_document" "codepipeline_service" {
+  statement {
+    effect = "Allow"
+
+    actions = [
+      "codebuild:BatchGetBuilds",
+      "codebuild:StartBuild",
+    ]
+
+    resources = ["*"]
+  }
+
+  statement {
+    effect = "Allow"
+
+    actions = [
+      "elasticbeanstalk:*",
+      "ec2:*",
+      "elasticloadbalancing:*",
+      "autoscaling:*",
+      "cloudwatch:*",
+      "s3:*",
+      "sns:*",
+      "cloudformation:*",
+      "rds:*",
+      "sqs:*",
+      "ecs:*"
+    ]
+
+    resources = ["*"]             
+  }
+}
+
+resource "aws_iam_role_policy" "attach_policy_codepipeline_role" {
+  name   = "attach-policy-with-codepipeline_role"
+  role   = aws_iam_role.custom_codepipeline_service_role.name
+  policy = data.aws_iam_policy_document.codepipeline_service.json
 }

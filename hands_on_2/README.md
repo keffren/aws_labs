@@ -80,3 +80,20 @@ The next guide could be helpful : [Elastic Beanstalk instance profile](https://d
 - `service_role` - (**Required**) Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that enables AWS CodeBuild to interact with dependent AWS services on behalf of the AWS account.
 
 </details>
+
+## CodePipeline
+
+<details>
+<summary>In this module, I will use AWS CodePipeline to set up a **continuous delivery** pipeline with source, build, and deploy stages. The pipeline will detect changes in the code stored in your GitHub repository, build the source code using AWS CodeBuild, and then deploy your application to AWS Elastic Beanstalk.</summary>
+
+## Key concepts
+
+- **Continuous delivery** — Software development practice that allows developers to release software more quickly by automating the build, test, and deploy processes.
+
+- **Pipeline —** Workflow model that describes how software changes go through the release process. Each pipeline is made up of a series of stages.
+
+- **Stage —** Logical division of a pipeline, where actions are performed. A stage might be a build stage, where the source code is built and tests are run. It can also be a deployment stage, where code is deployed to runtime environments.
+
+- **Action —** Set of tasks performed in a stage of the pipeline. For example, a source action can start a pipeline when source code is updated, and a deploy action can deploy code to a compute service like AWS Elastic Beanstalk.
+
+</details>

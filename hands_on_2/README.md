@@ -5,7 +5,7 @@
 In this lab I will create a continuous delivery pipeline for a simple web application. 
 I will learn how to create a continuous delivery pipeline that will automatically deploy a web application whenever the source code is updated.
 
-[lab-source](https://aws.amazon.com/getting-started/hands-on/create-continuous-delivery-pipeline/)
+The tutorial project is provided by AWS : [project-source](https://aws.amazon.com/getting-started/hands-on/create-continuous-delivery-pipeline/)
 
 ### What I will accomplish
 

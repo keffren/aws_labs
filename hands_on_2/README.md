@@ -138,4 +138,4 @@ Once the **Deploy** stage has switched to green and it says Succeeded. Therefore
 
 - ![CodePipeline-validation](/hands_on_2/resources/codepipeline_validation.png)
 
-<details>
+</details>

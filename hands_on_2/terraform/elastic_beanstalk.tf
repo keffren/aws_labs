@@ -1,10 +1,14 @@
 resource "aws_elastic_beanstalk_application" "beanstalk_app" {
-    name        = "lab-app"
-    description = "Practice and learning purposes"
+    name        = "lab-eb-app"
+    description = "EB for practice and learning purposes"
+
+    tags = {
+        Terraform = "true"
+    }
 }
 
 resource "aws_elastic_beanstalk_environment" "beanstalk-dev-env" {
-    name                = "lab-app-dev"
+    name                = "lab-eb-env-dev"
     application         = aws_elastic_beanstalk_application.beanstalk_app.name
     solution_stack_name = "64bit Amazon Linux 2 v5.8.7 running Node.js 18"
 
@@ -35,8 +39,12 @@ resource "aws_elastic_beanstalk_environment" "beanstalk-dev-env" {
     }
 
     setting {
-    namespace = "aws:ec2:instances"
-    name      = "InstanceType"
-    value     = "t2.micro"
+        namespace = "aws:autoscaling:launchconfiguration"
+        name      = "InstanceType"
+        value     = "t2.micro"
+    }
+
+    tags = {
+        Terraform = "true"
     }
 }

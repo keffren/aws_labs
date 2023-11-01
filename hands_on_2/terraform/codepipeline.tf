@@ -3,7 +3,11 @@ data "aws_secretsmanager_secret" "github_token" {
   arn = "arn:aws:secretsmanager:eu-west-1:958238255088:secret:lab/codepipeline-qKTTcT"
 }
 data "aws_secretsmanager_secret_version" "github_token_current" {
-  secret_id     = data.aws_secretsmanager_secret.github_token.id
+  secret_id     = data.aws_secretsmanager_secret.github_token.arn
+}
+
+locals {
+  github_token = jsondecode(data.aws_secretsmanager_secret_version.github_token_current.secret_string)["aws-eb-repo-token"]
 }
 
 resource "aws_codepipeline" "codepipeline" {
@@ -30,7 +34,7 @@ resource "aws_codepipeline" "codepipeline" {
                 Owner               = "keffren"
                 Repo                = "aws-elastic-beanstalk-express-js-sample"
                 Branch              = "main"
-                OAuthToken          = "${data.aws_secretsmanager_secret_version.github_token_current.secret_string}"
+                OAuthToken          = local.github_token
                 PollForSourceChanges = "false" #It'll use webhooks
             }
         }

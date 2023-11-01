@@ -128,7 +128,7 @@ I did the following to fix it:
         secret_id     = data.aws_secretsmanager_secret.secret.id
     }
 
-    secret = data.aws_secretsmanager_secret_version.current.secret_string
+    secret = jsondecode(data.aws_secretsmanager_secret_version.current.secret_string)["json_key"]
     ```
 
 </details>

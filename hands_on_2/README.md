@@ -96,4 +96,20 @@ The next guide could be helpful : [Elastic Beanstalk instance profile](https://d
 
 - **Action —** Set of tasks performed in a stage of the pipeline. For example, a source action can start a pipeline when source code is updated, and a deploy action can deploy code to a compute service like AWS Elastic Beanstalk.
 
+### Terraform notes
+
+- *How Can we know the stage structure?*
+    - [CodePipeline-structure](https://docs.aws.amazon.com/codepipeline/latest/userguide/reference-pipeline-structure.html)
+- `artifact_store` - **(Required)** One or more artifact_store blocks.
+    - `location` - **(Required)** The location where AWS CodePipeline stores artifacts for a pipeline; **currently only S3 is supported**. So it must be a S3 bucket created.
+- Adding a GitHub version 1 source action
+    - `OAuthToken` - (**Required**) Represents the GitHub authentication token that allows CodePipeline to perform operations on your GitHub repository. **This will be stored as a secret in AWS Secrets Manager**.
+- *How Can we retrieve a secret from AWS Secret Manager using Terraform?*
+    ```
+    data "aws_secretsmanager_secret_version" "example_secret" {
+    secret_id     = "your-secret-name"
+    version_stage = "AWSCURRENT"
+    }
+    ```
+
 </details>

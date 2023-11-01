@@ -115,6 +115,15 @@ data "aws_iam_policy_document" "codebuild_service" {
         values   = ["codebuild.amazonaws.com"]
     }
   }
+
+  statement {
+    effect  = "Allow"
+    actions = ["s3:*"]
+    resources = [
+      aws_s3_bucket.codepipeline_bucket.arn,
+      "${aws_s3_bucket.codepipeline_bucket.arn}/*",
+    ]
+  }
 }
 
 resource "aws_iam_role_policy" "attach_policy_codebuild_role" {

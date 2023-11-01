@@ -11,7 +11,7 @@ locals {
 }
 
 resource "aws_codepipeline" "codepipeline" {
-    name     = "CD-pipeline"
+    name     = "CD-pipeline-lab"
     role_arn = aws_iam_role.custom_codepipeline_service_role.arn
 
     artifact_store {
@@ -55,7 +55,7 @@ resource "aws_codepipeline" "codepipeline" {
             version          = "1"
 
             configuration = {
-                ProjectName = "lab-dev"
+                ProjectName = aws_codebuild_project.build.name
             }
         }
     }

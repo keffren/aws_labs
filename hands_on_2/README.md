@@ -49,10 +49,21 @@ The next guide could be helpful : [Elastic Beanstalk instance profile](https://d
 
 - ***solution_stack_name** defines the platform as terraform argument*
     - solution_stack_name - A solution stack to base your Template off of. Example stacks can be found in the Amazon API documentation
+
+    > [!WARNING]
+    > **ERROR** *The EC2 instances failed to communicate with AWS Elastic Beanstalk, either because of configuration problems with the VPC or a failed EC2 instance. Check your VPC configuration and try launching the environment again.* 
+
 - Enable these VPC arguments: `enable_dns_support` and `enable_dns_hostnames`, to avoid the next **error**:
-    ```
-    The EC2 instances failed to communicate with AWS Elastic Beanstalk, either because of configuration problems with the VPC or a failed EC2 instance. Check your VPC configuration and try launching the environment again.
-    ```
+This error is quite tricky; I discovered that the problem was related to the route table. The subnet had been associated with the main route table (the default one created by AWS) instead of the route table that was defined in `network.tf`.
+The default route table did not have the internet gateway attached. You have a couple of alternatives to resolve this issue:
+    - Attach the `internet gateway` to the main `route table`.
+    - Or associate the subnet with the `route table` created within `network.tf` :
+        ```
+            resource "aws_route_table_association" "main_association" {
+                subnet_id      = aws_subnet.my_subnet.id
+                route_table_id = aws_route_table.my_route_table.id
+            }
+        ```
 
 </details>
 

@@ -49,6 +49,10 @@ The next guide could be helpful : [Elastic Beanstalk instance profile](https://d
 
 - ***solution_stack_name** defines the platform as terraform argument*
     - solution_stack_name - A solution stack to base your Template off of. Example stacks can be found in the Amazon API documentation
+- Enable these VPC arguments: `enable_dns_support` and `enable_dns_hostnames`, to avoid the next **error**:
+    ```
+    The EC2 instances failed to communicate with AWS Elastic Beanstalk, either because of configuration problems with the VPC or a failed EC2 instance. Check your VPC configuration and try launching the environment again.
+    ```
 
 </details>
 

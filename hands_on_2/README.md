@@ -94,6 +94,8 @@ I did the following to fix it:
 
 - `service_role` - (**Required**) Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that enables AWS CodeBuild to interact with dependent AWS services on behalf of the AWS account.
 
+- The CodeBuild Service Role has to have** S3 permission over codepipeline bucket**.
+
 </details>
 
 ## CodePipeline
@@ -101,7 +103,7 @@ I did the following to fix it:
 <details>
 <summary>In this module, I will use AWS CodePipeline to set up a **continuous delivery** pipeline with source, build, and deploy stages. The pipeline will detect changes in the code stored in your GitHub repository, build the source code using AWS CodeBuild, and then deploy your application to AWS Elastic Beanstalk.</summary>
 
-## Key concepts
+### Key concepts
 
 - **Continuous delivery** — Software development practice that allows developers to release software more quickly by automating the build, test, and deploy processes.
 
@@ -111,7 +113,7 @@ I did the following to fix it:
 
 - **Action —** Set of tasks performed in a stage of the pipeline. For example, a source action can start a pipeline when source code is updated, and a deploy action can deploy code to a compute service like AWS Elastic Beanstalk.
 
-## Terraform notes
+### Terraform notes
 
 - *How Can we know the stage structure?*
     - [CodePipeline-structure](https://docs.aws.amazon.com/codepipeline/latest/userguide/reference-pipeline-structure.html)
@@ -130,5 +132,10 @@ I did the following to fix it:
 
     secret = jsondecode(data.aws_secretsmanager_secret_version.current.secret_string)["json_key"]
     ```
+### Validation
 
-</details>
+Once the **Deploy** stage has switched to green and it says Succeeded. Therefore Elastic Beanstalk has updated the app:
+
+- ![CodePipeline-validation](/hands_on_2/resources/codepipeline_validation.png)
+
+<details>

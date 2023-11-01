@@ -1,7 +1,9 @@
-/* # Retrieve the GitHub token secret
-data "aws_secretsmanager_secret_version" "github_token" {
-  secret_id     = "lab/codepipeline"
-  version_stage = "AWSCURRENT"
+# Retrieve the GitHub token secret
+data "aws_secretsmanager_secret" "github_token" {
+  arn = "arn:aws:secretsmanager:eu-west-1:958238255088:secret:lab/codepipeline-qKTTcT"
+}
+data "aws_secretsmanager_secret_version" "github_token_current" {
+  secret_id     = data.aws_secretsmanager_secret.github_token.id
 }
 
 resource "aws_codepipeline" "codepipeline" {
@@ -28,7 +30,7 @@ resource "aws_codepipeline" "codepipeline" {
                 Owner               = "keffren"
                 Repo                = "aws-elastic-beanstalk-express-js-sample"
                 Branch              = "main"
-                OAuthToken          = "${data.aws_secretsmanager_secret_version.secret_}"
+                OAuthToken          = "${data.aws_secretsmanager_secret_version.github_token_current.secret_string}"
                 PollForSourceChanges = "false" #It'll use webhooks
             }
         }
@@ -67,7 +69,7 @@ resource "aws_codepipeline" "codepipeline" {
 
             configuration = {
                 ApplicationName = "${aws_elastic_beanstalk_application.beanstalk_app.name}"
-                EnvironmentName = "${aws_elastic_beanstalk_environment.beanstalk-dev-env}"
+                EnvironmentName = "${aws_elastic_beanstalk_environment.beanstalk-dev-env.name}"
             }
         }
     }
@@ -76,4 +78,3 @@ resource "aws_codepipeline" "codepipeline" {
         Terraform = "true"
     }
 }
- */

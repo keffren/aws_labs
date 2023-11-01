@@ -121,10 +121,14 @@ I did the following to fix it:
     - `OAuthToken` - (**Required**) Represents the GitHub authentication token that allows CodePipeline to perform operations on your GitHub repository. **This will be stored as a secret in AWS Secrets Manager**.
 - *How Can we retrieve a secret from AWS Secret Manager using Terraform?*
     ```
-    data "aws_secretsmanager_secret_version" "example_secret" {
-        secret_id     = "your-secret-name"
-        version_stage = "AWSCURRENT"
+    data "aws_secretsmanager_secret" "secret" {
+        arn = "the_secret_arn"
     }
+    data "aws_secretsmanager_secret_version" "current" {
+        secret_id     = data.aws_secretsmanager_secret.secret.id
+    }
+
+    secret = data.aws_secretsmanager_secret_version.current.secret_string
     ```
 
 </details>

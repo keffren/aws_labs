@@ -132,10 +132,14 @@ I did the following to fix it:
 
     secret = jsondecode(data.aws_secretsmanager_secret_version.current.secret_string)["json_key"]
     ```
+- It's required a **github webhook**. Which allows CodePipeline to be notified when a push event happen.
+
 ### Validation
 
-Once the **Deploy** stage has switched to green and it says Succeeded. Therefore Elastic Beanstalk has updated the app:
-
-- ![CodePipeline-validation](/hands_on_2/resources/codepipeline_validation.png)
+- Source, build, Deploy stages
+    - Once the **Deploy** stage has switched to green and it says Succeeded. Therefore Elastic Beanstalk has updated the app:
+        - ![CodePipeline-validation](/hands_on_2/resources/codepipeline_validation.png)
+- Review stage
+    - ![Review-stage-validation](/hands_on_2/resources/review_stage_validation.png)
 
 </details>

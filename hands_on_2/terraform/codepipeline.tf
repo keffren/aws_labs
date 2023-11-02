@@ -61,6 +61,17 @@ resource "aws_codepipeline" "codepipeline" {
     }
 
     stage {
+        name = "Review"
+
+        action {
+            name = "ManualAction"
+            category = "Approval"
+            owner = "AWS"
+            provider = "Manual"
+            version = "1"
+        }
+    }
+    stage {
         name = "Deploy"
 
         action {
@@ -76,6 +87,26 @@ resource "aws_codepipeline" "codepipeline" {
                 EnvironmentName = "${aws_elastic_beanstalk_environment.beanstalk-dev-env.name}"
             }
         }
+    }
+
+    tags = {
+        Terraform = "true"
+    }
+}
+
+resource "aws_codepipeline_webhook" "github_webhook_integration" {
+    name            = "github-webhook-integration"
+    authentication  = "GITHUB_HMAC"
+    target_action   = "Source"
+    target_pipeline = aws_codepipeline.codepipeline.name
+
+    authentication_configuration {
+        secret_token = "super-secret"
+    }
+
+    filter {
+        json_path    = "$.ref"
+        match_equals = "refs/heads/main"
     }
 
     tags = {

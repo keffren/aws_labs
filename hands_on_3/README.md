@@ -24,8 +24,8 @@ The table will look something like this:
 
 | ID | USERID | TTL | NOTIFICATIONTYPE | MESSAGE |
 | --- | --- | --- | :---: | --- |
-| 123 | test@gmail.com | 1648277828 | email | Publish next youtube video |
-| 897 | 447113350882 | 1648842828 | sms | Get More MILK |
+| 123 | test@gmail.com | 1648277828 | email | This is the email content |
+| 456 | 34618096294 | 1648842828 | sms | This is the sms content |
 
 Two things to note with `TTL`:
 

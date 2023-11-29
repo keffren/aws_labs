@@ -34,4 +34,4 @@ The next resource is helpful to convert a date into Unix Timestamp:
 ## AWS SERVICE: LAMBDA FUNCTION
 
 - [Boto3 doc: Table Actions](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/dynamodb/table/index.html#actions)
--[Boto3: DynamoDB actions](https://docs.aws.amazon.com/code-library/latest/ug/python_3_dynamodb_code_examples.html)
+- [Boto3: DynamoDB actions](https://docs.aws.amazon.com/code-library/latest/ug/python_3_dynamodb_code_examples.html)

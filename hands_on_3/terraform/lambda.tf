@@ -1,4 +1,4 @@
-# =======================================  GetReminder LAMBDA FUNCTION
+# =======================================  GET Reminder LAMBDA FUNCTION
 data "archive_file" "getReminder_zip" {
     type        = "zip"
     source_file = "${path.module}/files/getReminder.py"
@@ -15,6 +15,30 @@ resource "aws_lambda_function" "getReminder" {
     runtime = "python3.11"
 
     depends_on = [ data.archive_file.getReminder_zip ]
+
+    tags = {
+        Lab = "Hands on n3"
+        Terraform = "true"
+    }
+}
+
+# =======================================  SET Reminder LAMBDA FUNCTION
+data "archive_file" "setReminder_zip" {
+    type        = "zip"
+    source_file = "${path.module}/files/setReminder.py"
+    output_path = "${path.module}/files/setReminder_function.zip"
+}
+
+resource "aws_lambda_function" "setReminder" {
+    filename      = "${path.module}/files/setReminder_function.zip"
+
+    function_name = "setReminder"
+    role          = aws_iam_role.reminder_service_role.arn
+    handler       = "setReminder.setReminder_handler"
+
+    runtime = "python3.11"
+
+    depends_on = [ data.archive_file.setReminder_zip ]
 
     tags = {
         Lab = "Hands on n3"

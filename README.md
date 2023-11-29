@@ -9,7 +9,7 @@ In this project, I'll engage in hands-on labs sourced from AWS , Udemy courses, 
 - **Hands-on-0:** [Set up the aws account](/hands_on_0/README.md)
 - **Hands-on-1:** [Deploy a multi tier web application](/hands_on_1/README.md) 
 - **Hands-on-2:** [Create CD pipeline using AWS CodePipeLine]((/hands_on_2/README.md))
-- **Hands-on-3:** [Reminder App Project](https://www.freecodecamp.org/news/learn-serverless-aws-by-building-7-projects/)
+- **Hands-on-3:** [Reminder App Project](https://www.freecodecamp.org/news/learn-serverless-aws-by-building-7-projects/)[**wIP**]
 
 **Project Duration**
 

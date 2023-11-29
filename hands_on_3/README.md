@@ -27,9 +27,11 @@ The table will look something like this:
 | 123 | test@gmail.com | 1702653459 | email | This is the email content |
 | 456 | 34618096294 | 1702653459 | sms | This is the sms content |
 
-[Unix Timestamp converter](https://www.unixtimestamp.com/)
+The next resource is helpful to convert a data into Unix Timestamp:
+
+- [Unix Timestamp converter](https://www.unixtimestamp.com/)
 
 ## AWS SERVICE: LAMBDA FUNCTION
 
-[Boto3 doc: Table Actions](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/dynamodb/table/index.html#actions)
-[Boto3: DynamoDB actions](https://docs.aws.amazon.com/code-library/latest/ug/python_3_dynamodb_code_examples.html)
+- [Boto3 doc: Table Actions](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/dynamodb/table/index.html#actions)
+-[Boto3: DynamoDB actions](https://docs.aws.amazon.com/code-library/latest/ug/python_3_dynamodb_code_examples.html)

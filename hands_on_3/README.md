@@ -27,7 +27,7 @@ The table will look something like this:
 | 123 | test@gmail.com | 1702653459 | email | This is the email content |
 | 456 | 34618096294 | 1702653459 | sms | This is the sms content |
 
-The next resource is helpful to convert a data into Unix Timestamp:
+The next resource is helpful to convert a date into Unix Timestamp:
 
 - [Unix Timestamp converter](https://www.unixtimestamp.com/)
 

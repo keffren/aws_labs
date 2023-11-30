@@ -111,7 +111,7 @@ resource "aws_lambda_permission" "apigw_invoke_set_reminder_lambda" {
 } 
 
 # ===============================================   DEPLOY API
-/* resource "aws_api_gateway_deployment" "deployment" {
+resource "aws_api_gateway_deployment" "deployment" {
     rest_api_id = aws_api_gateway_rest_api.reminder_app.id
 
     triggers = {
@@ -139,5 +139,5 @@ resource "aws_lambda_permission" "apigw_invoke_set_reminder_lambda" {
 resource "aws_api_gateway_stage" "dev" {
     deployment_id = aws_api_gateway_deployment.deployment.id
     rest_api_id   = aws_api_gateway_rest_api.reminder_app.id
-    stage_name    = "dev"
-} */
+    stage_name    = "lab"
+}

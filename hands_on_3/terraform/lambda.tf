@@ -7,6 +7,7 @@ data "archive_file" "getReminder_zip" {
 
 resource "aws_lambda_function" "getReminder" {
     filename      = "${path.module}/files/getReminder_function.zip"
+    source_code_hash = data.archive_file.getReminder_zip.output_base64sha256
 
     function_name = "getReminder"
     role          = aws_iam_role.reminder_service_role.arn
@@ -31,6 +32,7 @@ data "archive_file" "setReminder_zip" {
 
 resource "aws_lambda_function" "setReminder" {
     filename      = "${path.module}/files/setReminder_function.zip"
+    source_code_hash = data.archive_file.setReminder_zip.output_base64sha256
 
     function_name = "setReminder"
     role          = aws_iam_role.reminder_service_role.arn

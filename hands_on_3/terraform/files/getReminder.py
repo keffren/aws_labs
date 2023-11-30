@@ -6,9 +6,22 @@ REMINDERS_TABLE_NAME = "reminders"
 
 def getReminder_handler(event, context):
     
+    # Check the paremeters are provided
+    query_params = event['queryStringParameters']
+    if not 'userid' in query_params and 'id' in query_params:
+        return {
+            "statusCode": 400,
+            "headers": {
+                "Content-Type": "application/json",
+            },
+            "body": json.dumps({
+                "message": "Please, introduce the right parameters"
+            })
+        }
+
     try:
-        user_id = event["UserID"]
-        reminder_id = event["id"]
+        user_id = event['queryStringParameters']['userid']
+        reminder_id = event['queryStringParameters']['id']
 
         # Access to DynamoDB Table
         dynamodb = boto3.resource('dynamodb', region_name=DYNAMODB_REGION)

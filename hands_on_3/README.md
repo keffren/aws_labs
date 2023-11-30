@@ -4,7 +4,7 @@
 
 In this lab I will create an Reminder Serverless App.
 
-The tutorial project is provided by *Sam Williams* from *freecodecamp*: [How to Learn Serverless AWS by Building 7 Projects](https://www.freecodecamp.org/news/learn-serverless-aws-by-building-7-projects/)
+The project idea and its highlights are provided by *Sam Williams* from *freecodecamp*: [How to Learn Serverless AWS by Building 7 Projects](https://www.freecodecamp.org/news/learn-serverless-aws-by-building-7-projects/)
 
 ### What I will accomplish
 
@@ -18,7 +18,7 @@ This project will teach me about Secondary Indexes in `Dynamo` as well as `Dynam
 
 The idea for this app is that It can post a new reminder to the first API endpoint. This will write a new record in DynamoDB, but It will have added a global secondary index (GSI) to the table. This means that I can get a reminder by `id`, or you can query based on the `user`.
 
-It will also have a `Time-To-Live` (TTL) which will allow you to trigger a Lambda at the time of the reminder as timestamp. The code for set reminders will looks pretty similar to the previous project.
+It will also have a `Time-To-Live` (TTL) which will allow you to trigger a Lambda at the time of the reminder as timestamp.
 
 The table will look something like this:
 
@@ -33,5 +33,27 @@ The next resource is helpful to convert a date into Unix Timestamp:
 
 ## AWS SERVICE: LAMBDA FUNCTION
 
+The project is composed by the following lambda functions:
+
+- **getReminder:** Retrieve a reminder using its `USERID` and `ID`
+- **setReminder:** Create a reminder.
+- **SendReminder:** Trigger the reminder and send the notification by its `TTL`
+
+The next links helps to interact with dynamoDB through *boto3*:
+
 - [Boto3 doc: Table Actions](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/dynamodb/table/index.html#actions)
 - [Boto3: DynamoDB actions](https://docs.aws.amazon.com/code-library/latest/ug/python_3_dynamodb_code_examples.html)
+
+## AWS SERVICE: API GATEWAY
+
+Amazon API GateWay creates REST API that:
+
+- Are HTTP-based.
+- Enable stateless client-server communication.
+- **Expose the `lambda functions` as GET and POST HTTP methods.**
+
+> As *getRemider()* method needs parameters, the `integration request type` must be `AWS_PROX`. Which means **Lambda proxy integration**. So the API Gateway directly passes the incoming request from the client as an event object to the Lambda function.
+
+### GET Request Syntax
+
+As I commented above, the GET method needs two parameters in order to retrieve the reminder. Those parameters are `userid` and `id`.

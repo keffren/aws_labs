@@ -50,7 +50,7 @@ resource "aws_iam_policy" "reminder_lambda_permissions" {
             {
                 "Effect": "Allow",
                 "Action": "dynamoDB:*",
-                "Resource": "${aws_lambda_function.getReminder.arn}"
+                "Resource": "${aws_dynamodb_table.reminders.arn}"
             }
         ]
     })

@@ -101,6 +101,7 @@ As this lab is for learning purposes, I won't set up the SES account for the pro
 
 - [Creating an email address identity](https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html#verify-email-addresses-procedure)
 - [Boto3: send_email with SES](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ses/client/send_email.html)
+- [SES Actions permissions](https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazonses.html)
 
 ## AWS SERVICE: SIMPLE NOTIFICATION SERVICE (SNS)
 

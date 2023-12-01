@@ -57,3 +57,22 @@ Amazon API GateWay creates REST API that:
 ### GET Request Syntax
 
 As I commented above, the GET method needs two parameters in order to retrieve the reminder. Those parameters are `userid` and `id`.
+
+Request example: `https://1of8kqfct9.execute-api.eu-west-1.amazonaws.com/lab/reminder-app?userid=test@gmail.com&id=123`
+
+## AWS SERVICE: SIMPLE EMAIL SERVICE (SES)
+
+To prevent fraud and abuse, AWS applies certain restrictions to new Amazon SES accounts.
+
+AWS places all new accounts in the **Amazon SES sandbox**. While SES account is in the sandbox, it has the following restrictions:
+
+- It can only **send mail to verified email addresses and domains**, or to the Amazon SES mailbox simulator.
+- It can send a maximum of 200 messages per 24-hour period.
+- It can send a maximum of 1 message per second.
+- **For sending authorization, neither you nor the delegate sender can send email to non-verified email addresses.**
+
+For  more details: [AWS Documentation](https://docs.aws.amazon.com/ses/latest/dg/request-production-access.html?icmpid=docs_ses_console)
+
+As this lab is for learning purposes, I won't set up the SES account for the production account. Therefore, the sender and receiver email addresses must be validated.
+
+- [Creating an email address identity](https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html#verify-email-addresses-procedure)

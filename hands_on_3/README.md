@@ -64,7 +64,12 @@ Request example: `https://1of8kqfct9.execute-api.eu-west-1.amazonaws.com/lab/rem
 
 Amazon DynamoDB is integrated with AWS Lambda so that it can create triggers—pieces of code that automatically **respond to events in DynamoDB Streams**. Through triggers, applications can be built to react to data modifications in DynamoDB tables. For this integration, **DynamoDB Streams must be enabled on a DynamoDB table.**
 
+The AWS Lambda service polls the stream for new records (depends on stream view type) four times per second. When new stream records are available, the Lambda function is synchronously invoked.
+
+**DynamoDB Streams contains all data modifications**, such as `Create`, `Modify`, and `Remove` actions, this can result in unwanted invocations of your archive Lambda function.
+
 ### How to enable DynamoDB Stream using Terraform
+
 ```
 resource "aws_dynamodb_table" "example" {
   ...
@@ -73,6 +78,11 @@ resource "aws_dynamodb_table" "example" {
   ...
 }
 ```
+### The deletion of DynamoDB item is not instantaneous
+
+The exact time of a dynamoDB item's deletion after it expires depends on the nature of the workload and the table's size. In the worst-case scenario, it may take up to a few days for the actual deletion event to occur, as explained in the [AWS documentation](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/howitworks-ttl.html).
+
+However, this approach might not be the best for a reminder app. Nonetheless, the goal is to learn more about AWS.
 
 ## AWS SERVICE: SIMPLE EMAIL SERVICE (SES)
 
@@ -120,3 +130,4 @@ Hence, the phone numbers registered within the app must be validated.
 
 - [Adding and verifying phone numbers in the SMS sandbox](https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox-verifying-phone-numbers.html)
 - [Boto3: send sms](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/sns/client/publish.html)
+- [SNS Actions permissions](https://docs.aws.amazon.com/sns/latest/dg/sns-access-policy-language-api-permissions-reference.html)

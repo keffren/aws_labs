@@ -50,7 +50,20 @@ resource "aws_iam_policy" "reminder_lambda_permissions" {
             {
                 "Effect": "Allow",
                 "Action": "dynamoDB:*",
-                "Resource": "${aws_dynamodb_table.reminders.arn}"
+                "Resource": [
+                    "${aws_dynamodb_table.reminders.arn}",
+                    "${aws_dynamodb_table.reminders.arn}/stream/*"
+                ]
+            },
+            {
+                "Effect": "Allow",
+                "Action": "sns:Publish",
+                "Resource": "*"
+            },
+            {
+                "Effect": "Allow",
+                "Action": "ses:SendEmail",
+                "Resource": "*"
             }
         ]
     })

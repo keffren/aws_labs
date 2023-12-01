@@ -11,6 +11,9 @@ resource "aws_dynamodb_table" "reminders" {
     hash_key       = "UserID"
     range_key = "id"
 
+    stream_enabled   = true
+    stream_view_type = "NEW_AND_OLD_IMAGES"
+
     attribute {
         name = "UserID"
         type = "S"

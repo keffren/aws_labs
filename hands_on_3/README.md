@@ -60,6 +60,20 @@ As I commented above, the GET method needs two parameters in order to retrieve t
 
 Request example: `https://1of8kqfct9.execute-api.eu-west-1.amazonaws.com/lab/reminder-app?userid=test@gmail.com&id=123`
 
+## AWS SERVICES: DYNAMODB STREAM AND AWS LAMBDA TRIGGERS
+
+Amazon DynamoDB is integrated with AWS Lambda so that it can create triggers—pieces of code that automatically **respond to events in DynamoDB Streams**. Through triggers, applications can be built to react to data modifications in DynamoDB tables. For this integration, **DynamoDB Streams must be enabled on a DynamoDB table.**
+
+### How to enable DynamoDB Stream using Terraform
+```
+resource "aws_dynamodb_table" "example" {
+  ...
+  stream_enabled   = true
+  stream_view_type = "NEW_AND_OLD_IMAGES" # Valid values are: KEYS_ONLY, NEW_IMAGE, OLD_IMAGE, NEW_AND_OLD_IMAGES
+  ...
+}
+```
+
 ## AWS SERVICE: SIMPLE EMAIL SERVICE (SES)
 
 To prevent fraud and abuse, AWS applies certain restrictions to new Amazon SES accounts.

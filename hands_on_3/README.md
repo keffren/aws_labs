@@ -76,3 +76,33 @@ For  more details: [AWS Documentation](https://docs.aws.amazon.com/ses/latest/dg
 As this lab is for learning purposes, I won't set up the SES account for the production account. Therefore, the sender and receiver email addresses must be validated.
 
 - [Creating an email address identity](https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html#verify-email-addresses-procedure)
+- [Boto3: send_email with SES](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ses/client/send_email.html)
+
+## AWS SERVICE: SIMPLE NOTIFICATION SERVICE (SNS)
+
+Amazon SNS is a managed, highly-scalable messaging service by AWS which involves around topics, collection of messages. So, a client (*user | endpoint*) can subscribe to such a topic.
+
+### Event Sources
+
+Amazon SNS can receive event-driven notifications from many [AWS sources](https://docs.aws.amazon.com/sns/latest/dg/sns-event-sources.html)
+
+### Destination Sources
+
+Destinations are grouped as follows:
+
+- Application-to-Application ([A2A](https://docs.aws.amazon.com/sns/latest/dg/sns-event-destinations.html#sns-event-destinations-a2a)) messaging
+    - Includes Lambda, SQS, HTTP/s and more aws services.
+- Application-to-Person ([A2P](https://docs.aws.amazon.com/sns/latest/dg/sns-event-destinations.html#sns-event-destinations-a2p)) notifications
+    - Includes **SMS**, email and platform endpoints.
+
+**AWS SNS operates under similar restrictions to AWS SES** with new accounts. Upon starting to use Amazon SNS for sending SMS messages, your AWS account is placed in the **SMS sandbox**. This means you can use all of the features of Amazon SNS, with the following limitations:
+
+- **Sending SMS messages is restricted to verified destination phone numbers.**
+- The maximum limit for verified destination phone numbers is 10.
+
+For more information, refer to [SMS sandbox](https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html)
+
+Hence, the phone numbers registered within the app must be validated.
+
+- [Adding and verifying phone numbers in the SMS sandbox](https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox-verifying-phone-numbers.html)
+- [Boto3: send sms](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/sns/client/publish.html)

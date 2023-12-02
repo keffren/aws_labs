@@ -47,3 +47,28 @@ resource "aws_lambda_function" "setReminder" {
         Terraform = "true"
     }
 }
+
+# =======================================  SEND Reminder LAMBDA FUNCTION
+data "archive_file" "sendReminder_zip" {
+    type        = "zip"
+    source_file = "${path.module}/files/sendReminder.py"
+    output_path = "${path.module}/files/sendReminder_function.zip"
+}
+
+resource "aws_lambda_function" "sendReminder" {
+    filename      = "${path.module}/files/sendReminder_function.zip"
+    source_code_hash = data.archive_file.sendReminder_zip.output_base64sha256
+
+    function_name = "sendReminder"
+    role          = aws_iam_role.reminder_service_role.arn
+    handler       = "sendReminder.sendReminder_handler"
+
+    runtime = "python3.11"
+
+    depends_on = [ data.archive_file.sendReminder_zip ]
+
+    tags = {
+        Lab = "Hands on n3"
+        Terraform = "true"
+    }
+}

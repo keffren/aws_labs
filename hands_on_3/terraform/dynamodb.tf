@@ -44,7 +44,9 @@ resource "aws_dynamodb_table" "reminders" {
     }
 }
 
-/* resource "aws_dynamodb_table_item" "email_reminder" {
+/* HOW ADD A DYNAMODB ITEM USING TERRAFORM
+
+resource "aws_dynamodb_table_item" "email_reminder" {
     table_name = aws_dynamodb_table.reminders.name
     hash_key   = aws_dynamodb_table.reminders.hash_key
     range_key  = aws_dynamodb_table.reminders.range_key
@@ -59,4 +61,5 @@ resource "aws_dynamodb_table" "reminders" {
     }
     ITEM
 
-} */
+} 
+*/

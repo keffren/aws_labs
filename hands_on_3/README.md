@@ -1,4 +1,4 @@
-# Create Continuous Delivery Pipeline [WIP]
+# Create Continuous Delivery Pipeline
 
 ## OVERVIEW
 

@@ -145,3 +145,15 @@ Hence, the phone numbers registered within the app must be validated.
 - [Adding and verifying phone numbers in the SMS sandbox](https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox-verifying-phone-numbers.html)
 - [Boto3: send sms](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/sns/client/publish.html)
 - [SNS Actions permissions](https://docs.aws.amazon.com/sns/latest/dg/sns-access-policy-language-api-permissions-reference.html)
+
+## PROJECT VALIDATION
+
+### Reminder with SMS protocol
+
+![](/hands_on_3/resources/sms_reminder_log.png)
+![](/hands_on_3/resources/sms_reminder_validation.jpeg)
+
+### Reminder with email protocol
+
+![](/hands_on_3/resources/email_reminder_log.png)
+![](/hands_on_3/resources/email_reminder_validation.png)

@@ -55,11 +55,17 @@ resource "aws_dynamodb_table_item" "email_reminder" {
     {
         "UserID": {"S": "test@gmail.com"},
         "id": {"N": "123"},
-        "ttl": {"N": "1702653459"},
+        "ttl": {"N": "1701526400"},
         "type": {"S": "email"},
         "message": {"S": "This is the email content"}
     }
     ITEM
-
 } 
 */
+
+# Allow Lambda functions to get events from DynamoDB
+resource "aws_lambda_event_source_mapping" "send_reminder" {
+    event_source_arn  = aws_dynamodb_table.reminders.stream_arn
+    function_name     = aws_lambda_function.sendReminder.arn
+    starting_position = "LATEST"
+}

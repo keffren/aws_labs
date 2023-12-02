@@ -78,6 +78,19 @@ resource "aws_dynamodb_table" "example" {
   ...
 }
 ```
+
+### Add lambda function trigger
+
+To invoke an AWS Lambda function every time an dynamoDB item is deleted, it is necessary attach the lambda function to the dynamoDB table.
+
+```
+resource "aws_lambda_event_source_mapping" "example" {
+  event_source_arn  = aws_dynamodb_table.example.stream_arn
+  function_name     = aws_lambda_function.example.arn
+  starting_position = "LATEST"
+}
+```
+
 ### The deletion of DynamoDB item is not instantaneous
 
 The exact time of a dynamoDB item's deletion after it expires depends on the nature of the workload and the table's size. In the worst-case scenario, it may take up to a few days for the actual deletion event to occur, as explained in the [AWS documentation](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/howitworks-ttl.html).

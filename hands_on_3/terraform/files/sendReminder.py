@@ -93,6 +93,8 @@ def sendReminder_handler(event, context):
         else:
             resp = send_email_reminder(user_id, reminder)
 
-        print('Reminder triggered:\n' + dynamodb_item )
-        print('Result:\n' + resp)
+        print('Reminder triggered:')
+        print(dynamodb_item)
+        print('Result:')
+        print(resp)
     

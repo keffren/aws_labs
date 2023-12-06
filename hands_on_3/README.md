@@ -1,4 +1,4 @@
-# Create Continuous Delivery Pipeline
+# Create Reminder Serverless App
 
 ## OVERVIEW
 
@@ -8,7 +8,7 @@ The project idea and its highlights are provided by *Sam Williams* from *freecod
 
 ### What I will accomplish
 
-This project will teach me about Secondary Indexes in `Dynamo` as well as `Dynamo Time-To-Live`. I will also get to try either email automation with `Amazon Simple Email Service (SES)` or text messaging with `Simple Notification Service (SNS)`.
+This project will teach me about Amazon DynamoDB such as `Secondary Indexes` and `Dynamo Time-To-Live`. I will also get to try either email automation with `Amazon Simple Email Service (SES)` or text messaging with `Simple Notification Service (SNS)`.
 
 ### Application architecture
 
@@ -16,7 +16,7 @@ This project will teach me about Secondary Indexes in `Dynamo` as well as `Dynam
 
 ## AWS SERVICE: DYNAMODB
 
-The idea for this app is that It can post a new reminder to the first API endpoint. This will write a new record in DynamoDB, but It will have added a global secondary index (GSI) to the table. This means that I can get a reminder by `id`, or you can query based on the `user`.
+The idea for this app is that It can post a new reminder to the first API endpoint. This will write a new record in DynamoDB, but It will have added a global secondary index (GSI) to the table. This means that I can get a reminder by `id`, or you can query based on the `userID`.
 
 It will also have a `Time-To-Live` (TTL) which will allow you to trigger a Lambda at the time of the reminder as timestamp.
 
@@ -24,10 +24,10 @@ The table will look something like this:
 
 | ID | USERID | TTL | TYPE | MESSAGE |
 | --- | --- | --- | :---: | --- |
-| 123 | test@gmail.com | 1702653459 | email | This is the email content |
-| 456 | 34618096294 | 1702653459 | sms | This is the sms content |
+| 123 | test@gmail.com | 1702653459 | email | This is the reminder content |
+| 456 | 34618096294 | 1702653459 | sms | This is the reminder content |
 
-The next resource is helpful to convert a date into Unix Timestamp:
+The next resource is helpful to convert a date into Unix Timestamp and vice versa:
 
 - [Unix Timestamp converter](https://www.unixtimestamp.com/)
 

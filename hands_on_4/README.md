@@ -12,6 +12,9 @@ This tutorial will walk me through the steps to create an ALB. I will learn to:
 - Create and launch an **AWS ELB** of application type.
 - Configure **Security Group** for the ALB.
 - Configure **Security Group** to allow only inbound traffic from the ALB to the EC2 instances.
+- Structuring **Terraform configurations** following the best practices
+- Practice with **Terraform variables** to enhance infrastructure readiness
+- Practice with **Terraform count Meta-Argument**
 
 ### Application architecture       
 

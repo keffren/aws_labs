@@ -86,3 +86,4 @@ To enable a security communication between the alb and the ec2 instances using t
 
 ## Lab result
 
+![](https://github.com/keffren/aws_labs/assets/12472760/1fd3023b-9928-4e89-9563-236a94e63e50)

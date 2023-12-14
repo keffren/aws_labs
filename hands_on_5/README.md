@@ -33,8 +33,8 @@ We can enable the S3 server access logging by using the Amazon S3 console, Amazo
             target_prefix = "log/"
         }
     ```
-    > [!WARNING]
-    > It's recommended enable a `lyfecycle` in order to delete the logs every specific time
+> [!WARNING]
+> It's recommended enable a `lyfecycle` in order to delete the logs every specific time
         
 - [Using the rest options](https://docs.aws.amazon.com/AmazonS3/latest/userguide/enable-server-access-logging.html#enable-server-logging)
 
@@ -68,9 +68,8 @@ The following instructions show how we can query Amazon S3 server access logs in
 
     - Athena query editor:
         <details>
-        <summary>
-            Create a table schema in the database. Replace `s3_access_logs_db.mybucket_logs` with the name that you want to give to your table. The `STRING` and `BIGINT` data type values are the access log properties. You can query these properties in Athena. For `LOCATION`, enter the S3 bucket and prefix path as noted earlier
-        </summary>
+        <summary>Create a table schema in the database. Replace `s3_access_logs_db.mybucket_logs` with the name that you want to give to your table. The `STRING` and `BIGINT` data type values are the access log properties. You can query these properties in Athena. For `LOCATION`, enter the S3 bucket and prefix path as noted earlier</summary>
+        
         ```
             CREATE EXTERNAL TABLE `s3_access_logs_db.mybucket_logs`(
                 `bucketowner` STRING, 
@@ -110,7 +109,9 @@ The following instructions show how we can query Amazon S3 server access logs in
             LOCATION
             's3://DOC-EXAMPLE-BUCKET1-logs/prefix/'
         ```
+
         </details>
+
     - Using Terraform:
         <details>
         <summary>
@@ -120,7 +121,8 @@ The following instructions show how we can query Amazon S3 server access logs in
 
         To run this query, we would typically **execute it manually** or trigger it through an AWS Lambda, Step Function, or another mechanism that supports running Athena queries.
         </summary>
-        ```
+
+            ```
             resource "aws_athena_named_query" "example_query" {
                 name = "create_external_table_query"
 
@@ -145,7 +147,10 @@ The following instructions show how we can query Amazon S3 server access logs in
                     's3://DOC-EXAMPLE-BUCKET1-logs/prefix/'
                 EOT
             }
-        ```
+            ```
+
+        </details>
+
 1. Under Tables, choose Preview table next to our table name.
 In the Results pane, we should see data from the server access logs, such as `bucketowner`, `bucket`, `requestdatetime`, and so on. This means that we successfully created the Athena table. We can now query the Amazon S3 server access logs.
 

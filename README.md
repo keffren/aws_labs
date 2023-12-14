@@ -11,6 +11,7 @@ In this project, I'll engage in hands-on labs sourced from AWS , Udemy courses, 
 - **Hands-on-2:** [Create CD pipeline using AWS CodePipeLine](/hands_on_2/README.md)
 - **Hands-on-3:** [Reminder App Project](/hands_on_3/README.md)
 - **Hands-on-4:** [Deploy an Application Load Balancer](/hands_on_4/README.md)
+- **Hands-on-5:** [Query data on Amazon S3 using Amazon Athena](/hands_on_5/README.md)
 
 **Project Duration**
 
